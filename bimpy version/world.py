@@ -1,3 +1,4 @@
+from 
 
 class Chessboard():
     def __init__(self, window, row, col):
@@ -10,6 +11,9 @@ class Chessboard():
         while i != row:
             i += 1
             print(i)
+
+    def chessTile(self, p0, p1):
+        print("d")
 
 
 class WorldObject():
