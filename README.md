@@ -1,6 +1,6 @@
 # RoboterGUI
 
-# This Project has 2 Version
+# This Project has 2 Versions
 
 - Bimpy Version (GUI rendered with imgui for Python)
 
