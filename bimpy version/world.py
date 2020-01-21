@@ -17,3 +17,4 @@ class WorldObject():
         self.window = window
         self.x = size_x # left right
         self.y = size_y # height
+
