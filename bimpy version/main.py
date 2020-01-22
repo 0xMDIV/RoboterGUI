@@ -1,6 +1,7 @@
 import bimpy # grpahic lib
 import json # for configs
 import world # import the world classes
+import serial
 
 # create a window context
 ctx = bimpy.Context()
@@ -9,6 +10,8 @@ ctx.init(1280,720, "Robotter Steuerung")
 # set window width and height
 winHeight = ctx.height()
 winWidth = ctx.width()
+
+menu_tab = 0
 
 columns_count = 7
 lines_count = 5
@@ -29,6 +32,34 @@ field_names = [["A1", "A2", "A3", "A4", "A5", "A6", "A7"],
                ["H1", "H2", "H3", "H4", "H5", "H6", "H7"]]
 
 
+def drawMainTab():
+    bimpy.columns(columns_count, None, borders_vertical)
+    i = 0
+    while i != columns_count:
+        i += 1
+        if borders_horizontal and bimpy.get_column_index == 0:
+            bimpy.separator()
+        #bimpy.text("{}".format("a"))
+        bimpy.button("Feld", bimpy.Vec2(100,100))
+        bimpy.next_column()
+    bimpy.columns(1)
+    if borders_horizontal:
+        bimpy.separator()
+
+def drawPathFinder():
+    bimpy.columns(columns_count, None, borders_vertical)
+    i = 0
+    while i != columns_count:
+        i += 1
+        if borders_horizontal and bimpy.get_column_index == 0:
+            bimpy.separator()
+        #bimpy.text("{}".format("a"))
+        bimpy.button("Auto Path", bimpy.Vec2(100,100))
+        bimpy.next_column()
+    bimpy.columns(1)
+    if borders_horizontal:
+        bimpy.separator()
+        
 # start the main loop
 while not ctx.should_close():
     # create a new frame
@@ -40,19 +71,16 @@ while not ctx.should_close():
 
     # begin the window
     bimpy.begin("Chess View", flags=bimpy.NoMove | bimpy.NoCollapse) # add more flags like this: | bimpy.NoResize | bimpy.NoTitleBar
-    bimpy.columns(columns_count, None, borders_vertical)
-    i = 0
-    while i != columns_count:
-        i += 1
-        if borders_horizontal and bimpy.get_column_index == 0:
-            bimpy.separator()
-        #bimpy.text("{}".format("a"))
-        bimpy.button("Feld", bimpy.Vec2(80,80))
-        bimpy.next_column()
-    bimpy.columns(1)
-    if borders_horizontal:
-        bimpy.separator()
-
+    if bimpy.button("General", bimpy.Vec2(150, 25)):
+        menu_tab = 1
+    bimpy.same_line()
+    if bimpy.button("Path Finder", bimpy.Vec2(150, 25)):
+        menu_tab = 2  
+    
+    if menu_tab == 1:
+        drawMainTab()
+    elif menu_tab == 2:
+        drawPathFinder()
     # end the window
     bimpy.end()
 
