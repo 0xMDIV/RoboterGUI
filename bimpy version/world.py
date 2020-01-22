@@ -1,4 +1,4 @@
-from 
+
 
 class Chessboard():
     def __init__(self, window, row, col):

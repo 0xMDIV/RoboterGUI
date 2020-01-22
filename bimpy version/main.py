@@ -41,11 +41,13 @@ while not ctx.should_close():
     # begin the window
     bimpy.begin("Chess View", flags=bimpy.NoMove | bimpy.NoCollapse) # add more flags like this: | bimpy.NoResize | bimpy.NoTitleBar
     bimpy.columns(columns_count, None, borders_vertical)
-    for x in counter:
-        counter += 1
+    i = 0
+    while i != columns_count:
+        i += 1
         if borders_horizontal and bimpy.get_column_index == 0:
             bimpy.separator()
-        bimpy.text("{}".format("a"))
+        #bimpy.text("{}".format("a"))
+        bimpy.button("Feld", bimpy.Vec2(80,80))
         bimpy.next_column()
     bimpy.columns(1)
     if borders_horizontal:
