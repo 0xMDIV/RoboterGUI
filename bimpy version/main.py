@@ -60,6 +60,22 @@ def drawPathFinder():
     if borders_horizontal:
         bimpy.separator()
         
+# menu functions
+def move_forward():
+    print("Move Forward")
+
+def move_backwards():
+    print("Move Backward")
+    
+def turn_left():
+    print("Turned Left 90°")
+
+def turn_right():
+    print("Turned Right -90°")
+
+def spinMe():
+    print("Hui")
+            
 # start the main loop
 while not ctx.should_close():
     # create a new frame
@@ -88,7 +104,26 @@ while not ctx.should_close():
     bimpy.set_next_window_pos(bimpy.Vec2(800, 20), bimpy.Condition.Once)
     bimpy.set_next_window_size(bimpy.Vec2(winWidth - 820, winHeight-300), bimpy.Condition.Once)
     bimpy.begin("Control Board", flags=bimpy.NoMove | bimpy.NoCollapse)
-    bimpy.text("re")
+    bimpy.columns(3, None, False)
+    bimpy.next_column()
+    if bimpy.button("Forward", bimpy.Vec2(140,80)):
+        move_forward()
+    bimpy.next_column()
+    bimpy.next_column()
+    if bimpy.button("Left", bimpy.Vec2(140,80)):
+        turn_left()
+    bimpy.next_column()
+    bimpy.next_column()
+    if bimpy.button("Right", bimpy.Vec2(140,80)):
+        turn_right()
+    bimpy.next_column()
+    bimpy.next_column()
+    if bimpy.button("Back", bimpy.Vec2(140,80)):
+        move_backwards()
+    bimpy.columns(1)
+    bimpy.new_line()
+    if bimpy.button("Spin Me", bimpy.Vec2(150,50)):
+        spinMe()
     bimpy.end()
 
 #    setup the 3rd window
