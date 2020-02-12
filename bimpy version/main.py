@@ -3,6 +3,8 @@ import json # for configs
 import world # import the world classes
 import serial
 
+# serial schnittstell
+#movementController = serial.Serial('/dev/ttyUSB0')
 # create a window context
 ctx = bimpy.Context()
 # initialize main window
@@ -11,7 +13,7 @@ ctx.init(1280,720, "Robotter Steuerung")
 winHeight = ctx.height()
 winWidth = ctx.width()
 
-menu_tab = 0
+menu_tab = 1
 
 columns_count = 7
 lines_count = 5
@@ -22,31 +24,35 @@ counter = [1,2,3,4,5,6,7]
 borders_horizontal = True
 borders_vertical = True
 
-field_names = [["A1", "A2", "A3", "A4", "A5", "A6", "A7"],
-               ["B1", "B", "B3", "B4", "B5", "B6", "B7"],
-               ["C1", "C2", "C3", "C4", "C5", "C6", "C7"],
-               ["D1", "D2", "D3", "D4", "D5", "D6", "D7"],
-               ["E1", "E2", "E3", "E4", "E5", "E6", "E7"],
-               ["F1", "F2", "F3", "F4", "F5", "F6", "F7"],
-               ["G1", "G2", "G3", "G4", "G5", "G6", "G7"],
-               ["H1", "H2", "H3", "H4", "H5", "H6", "H7"]]
+field_names = ["A1", "A2", "A3", "A4", "A5", "A6", "A7",
+               "B1", "B", "B3", "B4", "B5", "B6", "B7",
+               "C1", "C2", "C3", "C4", "C5", "C6", "C7",
+               "D1", "D2", "D3", "D4", "D5", "D6", "D7",
+               "E1", "E2", "E3", "E4", "E5", "E6", "E7",
+               "F1", "F2", "F3", "F4", "F5", "F6", "F7",
+               "G1", "G2", "G3", "G4", "G5", "G6", "G7",
+               "H1", "H2", "H3", "H4", "H5", "H6", "H7"]
 
 
-def drawMainTab():
+def drawMainTab(columns_count=7, lines_count=5):
     bimpy.columns(columns_count, None, borders_vertical)
     i = 0
+    col_c = 0
+    while col_c > lines_count:
+        col_c += 1
     while i != columns_count:
-        i += 1
         if borders_horizontal and bimpy.get_column_index == 0:
             bimpy.separator()
         #bimpy.text("{}".format("a"))
-        bimpy.button("Feld", bimpy.Vec2(100,100))
+        bimpy.button(field_names[i], bimpy.Vec2(100,100))
         bimpy.next_column()
+        i += 1
+    columns_count = 0
     bimpy.columns(1)
     if borders_horizontal:
         bimpy.separator()
 
-def drawPathFinder():
+def drawPathFinder(columns_count=7, lines_count=5):
     bimpy.columns(columns_count, None, borders_vertical)
     i = 0
     while i != columns_count:
@@ -63,15 +69,19 @@ def drawPathFinder():
 # menu functions
 def move_forward():
     print("Move Forward")
+    #movementController.write("move_forward")
 
 def move_backwards():
     print("Move Backward")
+    #movementController.write("move_backward")
     
 def turn_left():
     print("Turned Left 90°")
+    #movementController.write("move_turn_left")
 
 def turn_right():
     print("Turned Right -90°")
+    #movementController.write("turn_right")
 
 def spinMe():
     print("Hui")
